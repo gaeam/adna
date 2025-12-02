@@ -54,7 +54,7 @@ do
     # bwa bam2bam 输出流式 BAM 到 samtools sort
     echo "  1/3. Aligning and Sorting..."
     bwa bam2bam -t "${THREADS}" -g "${REF_FASTA}" "${INPUT_BAM}" \
-    | samtools sort -@ "${THREADS}" -o "${SORTED_BAM}" -
+    | samtools sort -o "${SORTED_BAM}" -
 
     # 2. Samtools 过滤 Mapping Quality (MQ >= 30)
     echo "  2/3. Filtering by Mapping Quality (MQ>=30)..."
