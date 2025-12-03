@@ -1,0 +1,15 @@
+genotypename: /.../yak71_ancient5...outgroup2.geno
+snpname: /.../yak71_ancient5...outgroup2_onlyChr.new.snp
+indivname: /.../yak71_ancient5...outgroup2.new.ind
+evecoutname: yak415.smartpca.projection.evec # 输出 PCA 结果（eigenvectors）文件：每个样本在前几个主成分上的坐标
+evaloutname: yak415.smartpca.projection.eval # 输出特征值（eigenvalues）文件：描述每个主成分解释的方差比例
+numoutevec: 10 # 输出前 10 个主成分
+numoutlieriter: 0 # 不做迭代剔除离群样本
+numoutlierevec: 10 # 如果做离群检测，使用前 10 个主成分
+outliersigmathresh: 6.0 # 判断离群的阈值：6.0 是默认值
+outlieroutname: yak_eigensoft_smartpca_projection.ancient.log # 离群检测的日志输出文件
+nsnpldregress: 0 # 是否做 LD 回归（去除连锁不平衡的影响）：0 = 不做
+poplistname: [[poplistname.projection]]
+usenorm: YES # 是否对基因型做归一化处理：YES = 标准化 SNP，避免频率差异过大影响 PCA
+lsqproject: YES # 使用投影策略：YES = 使用 least squares projection 策略，先用参考群体计算 PCA，然后把其他群体投影到 PCA 空间，而不是让它们参与 PCA的构建，避免低覆盖度古 DNA 拉偏 PCA 结果
+numthreads: 4 # 使用 4 个线程并行计算
