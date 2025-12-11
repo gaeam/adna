@@ -14,10 +14,10 @@ set -e
 CONDA_BASE_DIR="/home/kexin_li/miniforge3"
 CONDA_ENV="bioenv"
 INPUT_LIST="/home/kexin_li/single.PRJEB51668.list"
-RAW_FASTQ_DIR="/home/kexin_li/goat/01.ancient.data/Daly.2022.sample_PRJEB51668_checkok"
+INPUT_DIR="/home/kexin_li/goat/01.ancient.data/Daly.2022.sample_PRJEB51668_checkok"
 OUTPUT_DIR="/mnt/data3/kexin_li/Goat/PRJEB51668"
-FASTQ2BAM_BIN="/public/software/adna/BCL2BAM2FASTQ_1/fastq2bam/fastq2bam"
-FASTQC_OUT_DIR="${OUTPUT_DIR}/fastqc_reports" # 建议将fastqc报告单独存放在一个子目录
+FASTQ2BAM="/public/software/adna/BCL2BAM2FASTQ_1/fastq2bam/fastq2bam"
+FASTQC_DIR="${OUTPUT_DIR}/fastqc_reports" # 建议将fastqc报告单独存放在一个子目录
 
 # 3. 激活 Conda 环境
 echo "Activating Conda environment: ${CONDA_ENV}"
@@ -26,7 +26,7 @@ conda activate "${CONDA_ENV}"
 
 # 4. 确保输出和QC目录存在
 mkdir -p "${OUTPUT_DIR}"
-mkdir -p "${FASTQC_OUT_DIR}"
+mkdir -p "${FASTQC_DIR}"
 
 # --- 处理单端测序数据：主循环 ---
 
@@ -43,7 +43,7 @@ do
     echo "--- Processing Sample: ${sample_id} ---"
     
     # 5. 定义循环内的文件路径变量
-    INPUT_FASTQ="${RAW_FASTQ_DIR}/${sample_id}.fastq.gz"
+    INPUT_FASTQ="${INPUT_DIR}/${sample_id}.fastq.gz"
     TRIMMED_FASTQ="${OUTPUT_DIR}/${sample_id}.truncated.fastq.gz"
     OUTPUT_BAM="${OUTPUT_DIR}/${sample_id}.bam"
 
@@ -63,12 +63,12 @@ do
 
     ## 任务 2: Convert FASTQ to BAM (fastq2bam)
     echo "  2/3. Running fastq2bam (Conversion)..."
-    "${FASTQ2BAM_BIN}" -o "${OUTPUT_BAM}" "${TRIMMED_FASTQ}"
+    "${FASTQ2BAM}" -o "${OUTPUT_BAM}" "${TRIMMED_FASTQ}"
 
     ## 任务 3: Quality Control (fastqc)
     # 对处理后的 FASTQ 文件运行 QC
     echo "  3/3. Running fastqc..."
-    fastqc -o "${FASTQC_OUT_DIR}" "${TRIMMED_FASTQ}"
+    fastqc -o "${FASTQC_DIR}" "${TRIMMED_FASTQ}"
     
 done < "${INPUT_LIST}"
 
