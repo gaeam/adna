@@ -48,27 +48,27 @@ do
     ## 任务 1: Add Read Group (添加 Read Group)
     echo "  1/2. Running Picard AddOrReplaceReadGroups..."
     # 使用 Java 内存参数 (可选，但推荐对于大型文件)
+	# RGID: Read Group ID，通常是测序 run 的唯一标识
+	# RGLB: Library，测序文库名称
+	# RGPL: Platform，测序平台
+	# RGPU: Platform Unit，测序单位 (Flowcell/Lane)
+	# RGSM: Sample，样本名称 (重要：用于后续多样本分析)
     java -Xmx4G -jar "$PICARD_JAR" AddOrReplaceReadGroups \
         I="$INPUT_BAM" \
         O="$RG_BAM" \
-        # RGID: Read Group ID，通常是测序 run 的唯一标识
         RGID="${run_id}" \
-        # RGLB: Library，测序文库名称
         RGLB="${run_id}" \
-        # RGPL: Platform，测序平台
         RGPL="ILLUMINA" \
-        # RGPU: Platform Unit，测序单位 (Flowcell/Lane)
         RGPU="${run_id}" \
-        # RGSM: Sample，样本名称 (重要：用于后续多样本分析)
         RGSM="${sample_id}"
 	
     ## 任务 2: Mark Duplicates (去除重复序列)
     echo "  2/2. Running Picard MarkDuplicates (Removing duplicates)..."
+	# REMOVE_DUPLICATES=true 直接移除重复序列，而不是只标记
     java -Xmx4G -jar "$PICARD_JAR" MarkDuplicates \
         I="$RG_BAM" \
         O="$UNIQUE_BAM" \
         M="$METRICS_FILE" \
-        # REMOVE_DUPLICATES=true 直接移除重复序列，而不是只标记
         REMOVE_DUPLICATES=true
 
 done < "$INPUT_LIST"
