@@ -9,6 +9,7 @@
 ### （1）f4 统计量是核心
 qpAdm 的所有检验，本质上都建立在 f4 统计量上：
 > f4(A, B; C, D)
+
 直观理解：
 - 如果 A 和 B 在 C、D 的分化方向上是等价的
 - 那么 f4 ≈ 0
@@ -19,9 +20,11 @@ qpAdm 的所有检验，本质上都建立在 f4 统计量上：
     - Source₁, Source₂, … Sourceₙ
 - **Right（右边）：**
     - Outgroup₁, Outgroup₂, … Outgroupₖ
+
 qpAdm 的假设是：
 > 如果 Target 真的是这些 Source 的线性混合
 > 那么 Target 与每一个 Right 的 f4 关系，都可以由 Source 与 Right 的 f4 关系线性解释
+
 换句话说：
 ```
 f4(Target, X; Right_i, Right_j)
