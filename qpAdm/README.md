@@ -37,3 +37,5 @@ a₁·f4(Source₁, X; Right_i, Right_j)
 + aₙ·f4(Sourceₙ, X; Right_i, Right_j)
 ```
 其中 X 是 Left 里的任意参考群体。
+
+## 三、运行 
