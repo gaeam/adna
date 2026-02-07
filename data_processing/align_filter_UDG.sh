@@ -5,7 +5,7 @@
 # =========================================================
 #PBS -l nodes=1:ppn=10      # 请求 1 个节点，使用 10 个核心 (CPU)
 #PBS -q low                # 使用 'low' 队列
-#PBS -d /mnt/data3/kexin_li/Goat/PRJEB26011/ # 设置工作目录
+#PBS -d ./ # 设置工作目录
 
 # =========================================================
 # === 脚本配置与变量定义 ===
@@ -13,16 +13,16 @@
 
 # 该脚本用于处理经 UDG 处理或现代数据，与参考基因组比对、过滤
 # 需要准备 INPUT_LIST 文件：
-# SAMEA7368740/ERR4658035
-# SAMEA7368740/ERR4659298
+# ERR4658035
+# ERR4659298
 
 # 1. 健壮性设置：确保任何命令失败时脚本退出
 set -e 
 
 # 2. 定义关键路径和参数变量
 THREADS=10
-REF_FASTA="../Refseq/GCF_001704415.2/GCF_001704415.2_ARS1.2_genomic.fna"
-INPUT_LIST="./single.PRJEB26011.UDG.list"
+REF_FASTA="/mnt/data3/Genomes/Ovis_Capra_genome_zehui_210817/Capra/bwa-0.5.10"
+INPUT_LIST="SAMEA7368740.list"
 
 # 3. 检查输入文件列表是否存在
 if [ ! -f "${INPUT_LIST}" ]; then
@@ -33,27 +33,26 @@ fi
 echo "Starting Alignment and Filtering with ${THREADS} threads..."
 
 # =========================================================
-# === 主循环：对齐、排序和质量过滤 ===
+# === 主循环：比对、排序和质量过滤 ===
 # =========================================================
 
-# 使用 while read 替代 for i in $(cat ...)，这是处理文件列表的最佳实践
-while IFS= read -r sample_id
+while IFS= read -r run_id
 do
-    if [ -z "$sample_id" ]; then
+    if [ -z "$run_id" ]; then
         continue # 跳过空行
     fi
 
-    echo "--- Processing Sample: ${sample_id} ---"
+    echo "--- Processing SAMEA7368740: ${run_id} ---"
     
-    # 定义中间和最终文件路径 (使用变量更清晰)
-    INPUT_BAM="./${sample_id}.bam"
-    SORTED_BAM="./${sample_id}.ARS1.2.mapping.sorted.bam" # 中间文件
-    FINAL_BAM="./${sample_id}.ARS1.2.mapping.sorted.MQ30.bam"
+    # 定义中间和最终文件路径
+    INPUT_BAM="${run_id}.bam"
+    SORTED_BAM="${run_id}.capra.mapping.sorted.bam" # 中间文件
+    FINAL_BAM="${run_id}.capra.mapping.sorted.MQ30.bam"
 
     # 1. BWA 对齐和 Samtools 排序
     # bwa bam2bam 输出流式 BAM 到 samtools sort
     echo "  1/3. Aligning and Sorting..."
-    bwa bam2bam -t "${THREADS}" -g "${REF_FASTA}" "${INPUT_BAM}" \
+    bwa bam2bam -t "${THREADS}" -g "${REF_FASTA}" "${INPUT_BAM}" - \
     | samtools sort -o "${SORTED_BAM}" -
 
     # 2. Samtools 过滤 Mapping Quality (MQ >= 30)
@@ -66,4 +65,4 @@ do
 
 done < "${INPUT_LIST}"
 
-echo "All samples finished processing."
+echo "All runs finished processing."
