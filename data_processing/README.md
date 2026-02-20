@@ -1,5 +1,5 @@
 # 山羊项目数据处理记录
-**1. 去接头 + 转换为未比对 bam 文件**
+## 1. 去接头 + 转换为未比对 bam 文件
 
 单端测序数据：`trim2bam_se.sh`
 
@@ -13,9 +13,7 @@
 
 对于 `collapsed.truncated.gz`，当作单端测序数据使用 `fastq2bam` 程序；对于 `pair1.truncated.gz`和 `pair2.truncated.gz`，当作双端测序数据使用 `fastq2bam` 程序
 
-  
-
-**2. 比对到参考基因组、排序、MQ30 过滤（只保留 mapping quality >= 30 的 reads）**
+## 2. 比对到参考基因组、排序、MQ30 过滤（只保留 mapping quality >= 30 的 reads）
 
 经 UDG 处理的古代数据及现代数据：`align_filter_UDG.sh`
 
