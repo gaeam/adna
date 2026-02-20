@@ -15,9 +15,9 @@
 
 ## 2. 比对到参考基因组 + 排序 + MQ30 过滤（只保留 mapping quality >= 30 的 reads）
 
-经 UDG 处理的古代数据及现代数据：`align_filter_UDG.sh`
+- 经 UDG 处理的古代数据及现代数据：`align_filter_UDG.sh`
 
-未经 UDG 处理的古代数据：`align_filter_noUDG.sh`
+- 未经 UDG 处理的古代数据：`align_filter_noUDG.sh`
 
 对于当作双端测序处理的  `pair1.truncated.gz`和 `pair2.truncated.gz` 的输出文件，需要额外加入过滤条件：只保留正确配对的双端 reads，单端 reads 会被过滤掉（properly paired）
 
@@ -33,6 +33,6 @@ samtools view -f 2 your.bam
 
 ## 4. 合并 bam 文件 + 再次去重
 
-## （optional）5. 提取常染色体
+## 5. （optional）提取常染色体
 
 
