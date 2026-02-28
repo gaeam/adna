@@ -7,11 +7,17 @@
 
 对于双端测序数据，采取的策略是：使用 `adapterremoval` 软件 `--collapse` 参数
 
-- `collapsed.truncated.gz`：containing merged reads that have been trimmed due to the `--trimns` or `--trimqualities` options
+- `collapsed.truncated.gz`：containing merged reads that have been trimmed due to the `--trimns` or `--trimqualities` options，merge 成功，但末端有低质量碱基或 N，经过截断后输出
+
+- `collapsed.gz`：containing merged reads，merge 成功，末端没有需要被 `--trimns` 或 `--trimqualities` 截掉的低质量碱基或 N，直接输出
 
 - `pair1.truncated.gz`和 `pair2.truncated.gz`：which contain trimmed pairs of reads which were not collapsed
 
-对于 `collapsed.truncated.gz`，当作单端测序数据使用 `fastq2bam` 程序；对于 `pair1.truncated.gz`和 `pair2.truncated.gz`，当作双端测序数据使用 `fastq2bam` 程序
+```bash
+zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
+```
+
+对于 `collapsed.truncated.gz` 和 `collapsed.gz`，把它们合并在一起、当作单端测序数据使用 `fastq2bam` 程序；对于 `pair1.truncated.gz`和 `pair2.truncated.gz`，当作双端测序数据使用 `fastq2bam` 程序
 
 ## 2. 比对到参考基因组 + 排序 + MQ30 过滤（只保留 mapping quality >= 30 的 reads）
 
