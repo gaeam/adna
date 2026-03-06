@@ -4,17 +4,17 @@
 
 ## pipline
 
-1. 准备 smartpca.par 文件
+**1. 准备 smartpca.par 文件**
 
 - 需要投影：`smartpca.ancient.par`
 
 - 不需要投影（如 panel）：`smartpca.panel.par`
 
-2. 运行 smartpca
+**2. 运行 smartpca**
 
 `smartpca.sh`
 
-3. 可视化
+**3. 可视化**
 
 （1）准备输入文件：
 
