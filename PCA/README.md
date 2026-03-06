@@ -14,8 +14,16 @@
 
 `smartpca.sh`
 
-3. 将分析结果转化为 txt 文件
+3. 可视化
 
-`log2txt.sh`
+（1）准备输入文件：
 
-4. 可视化
+- `group_styles.csv`
+
+- `evec.txt`：通过 `log2txt.sh` 将分析结果转化为 txt 文件
+
+- `eval`：smartpca 程序直接生成
+
+（2）绘图：
+
+`plot_pca.r`
