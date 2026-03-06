@@ -40,8 +40,8 @@ samtools view -f 2 your.bam
 
 `addRG_rmdup.sh`
 
-## 4. 合并 bam 文件 + 再次去重
+**4. 合并 bam 文件 + 再次去重**
 
-## 5. （optional）提取常染色体
+**5. （optional）提取常染色体**
 
 
