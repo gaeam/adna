@@ -1,5 +1,8 @@
 # 山羊项目数据处理记录
-## 1. 去接头 + 转换为未比对 bam 文件
+
+## pipeline
+
+**1. 去接头 + 转换为未比对 bam 文件**
 
 - 单端测序数据：`trim2bam_se.sh`
 
@@ -19,7 +22,7 @@ zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
 
 对于 `collapsed.truncated.gz` 和 `collapsed.gz`，把它们合并在一起、当作单端测序数据使用 `fastq2bam` 程序；对于 `pair1.truncated.gz`和 `pair2.truncated.gz`，当作双端测序数据使用 `fastq2bam` 程序
 
-## 2. 比对到参考基因组 + 排序 + MQ30 过滤（只保留 mapping quality >= 30 的 reads）
+**2. 比对到参考基因组 + 排序 + MQ30 过滤（只保留 mapping quality >= 30 的 reads）**
 
 - 经 UDG 处理的古代数据及现代数据：`align_filter_UDG.sh`
 
@@ -33,7 +36,7 @@ samtools view -f 2 your.bam
 
 > 比对后的 bam 里，双端 reads 中可能出现：（1）两条都比对上了，且方向正确，即 properly paired（flag 包含 2）；（2）只有一条比对上了，不是 properly paired；（3）两条都没比对上，也不是 properly paired
 
-## 3. 添加 Read Group + 去重
+**3. 添加 Read Group + 去重**
 
 `addRG_rmdup.sh`
 
