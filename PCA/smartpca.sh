@@ -1,21 +1,8 @@
 #!/bin/bash
 
-# =========================================================
-# === PBS Directives (保持不变) ===
-# =========================================================
-#PBS -l nodes=1:ppn=4      # 1 节点，4 核心 (计算深度对线程要求不高)
-#PBS -q low
-#PBS -d ./                 # 设置工作目录
+source /home/kexin_li/miniforge3/etc/profile.d/conda.sh
+conda activate bioenv
 
-# =========================================================
-# === 脚本配置与变量定义 ===
-# =========================================================
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 
-# 该脚本用于执行 EIGENSOFT 的 smartpca.projection 功能
-# 需要准备 par 文件： smartpca.projection.par
-
-#PBS -l nodes=1:ppn=4 
-#PBS -q low 
-#PBS -d ./ 
-
-/EIG-8.0.0/src/eigensrc/smartpca -p smartpca.projection.par > smartpca.log 
+/home/kexin_li/EIG-8.0.0/bin/smartpca -p smartpca.par > smartpca.log
