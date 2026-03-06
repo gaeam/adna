@@ -1,0 +1,12 @@
+genotypename: GGVD_232.bed
+snpname: GGVD_232.bim
+indivname: GGVD_232.fam
+evecoutname: GGVD_232.evec
+evaloutname: GGVD_232.eval
+numoutevec: 10
+numoutlieriter: 0
+numoutlierevec: 10
+nsnpldregress: 0
+outliersigmathresh: 6.0
+numthreads: 10
+outlieroutname: smartpca.outliner.log
