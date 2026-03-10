@@ -1,0 +1,8 @@
+genotypename:    isec_auto.bed
+snpname:         isec_auto.bim # or example.map, either works 
+indivname:       isec_auto.fam # or example.ped, either works
+outputformat:    EIGENSTRAT
+genotypeoutname: isec_auto.geno
+snpoutname:      isec_auto.snp
+indivoutname:    isec_auto.ind
+familynames:     NO
