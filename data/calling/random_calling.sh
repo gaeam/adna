@@ -14,7 +14,7 @@ awk '{print $2}' bam_indiv.map > indiv.list
 
 # random calling
 samtools mpileup -B -q30 -Q30 -s -O -R -l /mnt/data3/kexin_li/Goat/Panel/panel.bed \
-    -f /mnt/data3/Genomes/Ovis_Capra_genome_zehui_210817/Capra/bwa-0.5.10 \
+    -f /mnt/data3/Genomes/Ovis_Capra_genome_zehui_210817/Capra/whole_genome.fa \
     -b bam.list | \
 pileupCaller --randomHaploid --sampleNameFile indiv.list \
     --samplePopName POP1 -f /mnt/data3/kexin_li/Goat/Panel/isec_auto.snp \
