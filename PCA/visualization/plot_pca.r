@@ -10,12 +10,12 @@ library(htmlwidgets)
 # evec 是通过 log2txt.sh 生成的
 # eval 是通过 smartpca 生成的，直接读取
 file_paths <- list(
-  evec = "~/Desktop/cattle.smartpca.projection.evec.txt",
-  eval = "~/Desktop/cattle.smartpca.projection.eval",
+  evec = "~/Desktop/isec_auto.evec.txt",
+  eval = "~/Desktop/isec_auto.eval",
   style = "~/Desktop/group_styles.csv",
-  html_out = "~/Desktop/pca_interactive.html",
-  png_out = "~/Desktop/pca_plot.png",
-  legend_out = "~/Desktop/pca_legend.png"
+  html_out = "~/Desktop/isec_pca_interactive.html",
+  png_out = "~/Desktop/isec_pca_plot.png",
+  legend_out = "~/Desktop/isec_pca_legend.png"
 )
 
 # 增加一个检查文件是否存在的函数，提高健壮性
@@ -78,7 +78,7 @@ p_static <- ggplot(df, aes(x = PC1, y = PC2, color = label, shape = label,
   # 使用去重后的映射向量
   scale_color_manual(values = color_map[!duplicated(names(color_map))]) +
   scale_shape_manual(values = shape_map[!duplicated(names(shape_map))]) +
-  labs(title = "PCA of Cattle Genomes",
+  labs(title = "PCA of isec",
        x = paste0("PC1 (", pc1_var, "%)"),
        y = paste0("PC2 (", pc2_var, "%)"),
        color = "Population", # 显式命名图例标题
@@ -119,3 +119,4 @@ png(file_paths$legend_out, width = 3000, height = 800, res = 150)
 grid::grid.draw(legend_grob)
 dev.off()
 cat(paste("PCA legend saved to:", file_paths$legend_out, "\n"))
+
