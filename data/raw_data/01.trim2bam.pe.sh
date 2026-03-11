@@ -11,8 +11,8 @@
 set -e 
 
 # 2. 定义常用的路径变量，提高可读性和易维护性
-INPUT_LIST="SAMEA7368733.list"
-INPUT_DIR="/home/kexin_li/goat/01.ancient.data/Daly.2021.sample_PRJEB40573_checkok/SAMEA7368733"
+INPUT_LIST="SAMEA7368732.list"
+INPUT_DIR="/home/kexin_li/goat/01.ancient.data/Daly.2021.sample_PRJEB40573_checkok/SAMEA7368732"
 ADAPTER_REMOVAL="/home/kexin_li/adapterremoval-2.3.4/build/AdapterRemoval"
 FASTQ2BAM="/public/software/adna/BCL2BAM2FASTQ_1/fastq2bam/fastq2bam"
 
@@ -33,8 +33,13 @@ do
     # 5. 定义循环内的文件路径变量
     R1_IN="${INPUT_DIR}/${run_id}_1.fastq.gz"
     R2_IN="${INPUT_DIR}/${run_id}_2.fastq.gz"
+    COLLAPSE="${run_id}.collapsed.gz"
     COLLAPSE_TRUNCATED="${run_id}.collapsed.truncated.gz"
-    BAM_OUT="${run_id}.bam"
+    COLLAPSE_ALL="${run_id}.collapsed.all.gz"
+    PAIR1_TRUNCATED="${run_id}.pair1.truncated.gz"
+    PAIR2_TRUNCATED="${run_id}.pair2.truncated.gz"
+    BAM_COLLAPSE="${run_id}.collapsed.bam"
+    BAM_PAIRED="${run_id}.paired.bam"
     ADAPTER1="AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC"
     ADAPTER2="AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT"
 
@@ -45,7 +50,7 @@ do
     fi
 
     ## 任务 1: Adapter & Quality Trimming (AdapterRemoval)
-    echo "  1/2. Running AdapterRemoval (Trimming)..."
+    echo "  1/3. Running AdapterRemoval (Trimming)..."
     "$ADAPTER_REMOVAL" \
         --file1 "$R1_IN" \
         --file2 "$R2_IN" \
@@ -59,12 +64,20 @@ do
         --gzip \
         --collapse
 
-    ## 任务 2: Convert FASTQ to BAM (fastq2bam)
-    echo "  2/2. Running fastq2bam (Conversion)..."
+    ## 任务 2: 合并 collapsed 文件
+    echo "  2/3. Merging collapsed files..."
+    zcat "$COLLAPSE" "$COLLAPSE_TRUNCATED" | gzip > "$COLLAPSE_ALL"
+
+    ## 任务 3: Convert FASTQ to BAM (fastq2bam)
+    echo "  3/3. Running fastq2bam (Conversion)..."
     "$FASTQ2BAM" \
-        -o "$BAM_OUT" \
-        "$COLLAPSE_TRUNCATED" \
+        -o "$BAM_COLLAPSE" \
+        "$COLLAPSE_ALL"
+    "$FASTQ2BAM" \
+	-o "$BAM_PAIRED" \
+	"$PAIR1_TRUNCATED" \
+	"$PAIR2_TRUNCATED"
     
 done < "${INPUT_LIST}"
 
-echo "Processing finished for SAMEA7368733."    
+echo "Processing finished for SAMEA7368732."
