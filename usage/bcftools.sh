@@ -1,3 +1,5 @@
+## 在服务器上和 bioenv 里有两个版本的 bcftools，bioenv 更新
+
 # 索引（重新索引）
 bcftools index --force vargoats_snps_1372_20230313_auto.vcf.gz 
 
