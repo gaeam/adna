@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# 直接运行 --bmerge 后如果碰到下面的报错，需要先运行 flip，再重新合并
+# 直接运行 --bmerge 后如果碰到下面的报错，需要先运行 flip，再重新合并（少的话就直接删了吧）
 # Error: 7188 variants with 3+ alleles present.
 # * If you believe this is due to strand inconsistency, try --flip with
 #  GGVD_232_VarGoats_1372_common-merge.missnp.
