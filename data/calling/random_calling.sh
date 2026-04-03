@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# 将 pos 文件整理为 pileupCaller 需要的格式（0-based）
-# pos 文件是从 bcftools isec 的结果 txt 文件中提取的
-# If you use a positions-file, it should either contain positions (0-based) or a bed file (see samtools manual for details). 
-awk '{print $1"\t"$2-1"\t"$2}' isec_auto.pos > panel.bed
-
 # 准备待 call snp 的样本序号与样本名的映射文件 bam_indiv.map
 # /path/A.bam  SampleA
 # /path/B.bam  SampleB
