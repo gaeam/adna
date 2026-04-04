@@ -43,10 +43,15 @@ https://zhuanlan.zhihu.com/p/1909003795842708836
 https://pica.zhimg.com/v2-84549e9db830ecdcaae2cff478816cd2_r.jpg
 
 > Red: C to T substitutions
+> 
 > Blue: G to A substitutions
+> 
 > Grey: All other substitutions
+> 
 > Orange: Soft-clipped bases
+> 
 > Green: Deletions relative to the reference
+> 
 > Purple: Insertions relative to the reference
 
 每个参考碱基（A、C、G、T）都有两个小图，左边显示 5′ 端（负值为“端外背景”，正值“端内损伤”），右边显示 3′ 端（负值为“端内损伤”，正值为端外背景”）；纵轴是“在该位置测到错误替换的频率（在某个位置上，参考碱基被测序为非参考碱基的比例）”（比如 C→T 的比例），点是平均值，竖线是置信区间
