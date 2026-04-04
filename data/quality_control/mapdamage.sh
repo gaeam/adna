@@ -3,9 +3,26 @@
 source /home/kexin_li/miniforge3/etc/profile.d/conda.sh
 conda activate bioenv
 
-cd /mnt/data3/kexin_li/Goat/PRJEB40573/bam/
+SAMPLE_LIST="sample.list"
 
-for i in $(cat ../sample.list)
+if [[ ! -f "$SAMPLE_LIST" ]]; then
+    echo "错误：未找到样本列表文件 $SAMPLE_LIST"
+    exit 1
+fi
+
+echo "开始统计 sample.list 中每个样本的损伤模式..."
+
+while IFS= read -r sample_name
 do
-	mapDamage -i ./${i}.uniq.bam -r ../../Refseq/GCF_001704415.2/GCF_001704415.2_ARS1.2_genomic.fna -d ./${i}_mapdamage
-done
+    bam="./${sample_name}/${sample_name}.uniq.bam"
+
+    if [[ ! -f "$bam" ]]; then
+        echo "警告: $bam 不存在，跳过"
+        continue
+    fi
+
+    mapDamage -i "$bam" \
+        -r /mnt/data3/Genomes/Goat_kexin_260316/ARS1.fna \
+        -d "./${sample_name}/${sample_name}_mapdamage"
+
+done < "$SAMPLE_LIST"
