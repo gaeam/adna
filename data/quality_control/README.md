@@ -40,7 +40,7 @@ https://zhuanlan.zhihu.com/p/1909003795842708836
 
 **1. Fragmisincorporation_plot.pdf 片段错误插入率图**
 
-https://pica.zhimg.com/v2-84549e9db830ecdcaae2cff478816cd2_r.jpg
+![https://pica.zhimg.com/v2-84549e9db830ecdcaae2cff478816cd2_r.jpg]
 
 > Red: C to T substitutions
 > 
@@ -67,6 +67,24 @@ https://pica.zhimg.com/v2-84549e9db830ecdcaae2cff478816cd2_r.jpg
 只看 C 和 G 图：这是 aDNA 损伤的标志
 
 忽略 A 和 T 图中的高值：它们只是测序或比对的通用噪音，不代表链特异的化学损伤
+
+![https://pic4.zhimg.com/v2-3fde28abde138a8e3d3e0a81711e6625_1440w.jpg]
+
+- 左侧小图（围绕 5′ 端）
+
+  - 负坐标 (–X … –1)，表示 在 5′ 端之外的参考基因组序列，也就是从 read 的起始点往上游（未被读取到的区段）数 X 个碱基的位置
+
+  - 正坐标 (1 … +Y)，表示 在 read 内部，从 5′ 端往下游（read 体内）第 Y 个碱基。
+
+举例：坐标 +1 就是 read 的第一个碱基本身，+2 是第二个，以此类推——你看到的 C→T（或 G→A）频率，就是在这些 read 体内首几个碱基上的错配统计。
+
+右侧小图（围绕 3′ 端）
+
+负坐标 (–X … –1)，表示 在 read 内部，从 3′ 端往上游（read 体内）第 X 个碱基。例如 –1 是 read 的最后一个碱基，–2 是倒数第二个，以此类推。
+
+正坐标 (1 … +Y)，表示 在 3′ 端之外的参考基因组序列，也就是从 read 结束点往下游（未被读取到的区段）数 Y 个碱基的位置。
+
+通过看「5′ 端内（正）VS 端外（负）」和「3′ 端内（负）VS 端外（正）」的错配频率，mapDamage 能同时捕捉到片段末端真正的 aDNA 损伤信号（C→T/G→A 出现在 read 内的第 1、2、3… 个碱基），上下游 flanking region（端外）的背景错配水平，并据此做更精准的模型拟合与质量重标记（rescaling）。这样一目了然地把“读入区段”和“背景序列”都纳入考量，就能分清端点损伤是真实过渡信号，还是参考基因组比对时的随机错配。
 
 2. Length_plot.pdf 片段长度分布图（双端测序结果不生成此图）
 
