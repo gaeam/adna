@@ -10,8 +10,8 @@
 	--out GGVD_232
 
 # 重命名 bim 文件中的位点
-awk '{print $1"\t"$1"_"$4"\t"$3"\t"$4"\t"$5"\t"$6}' isec_auto.bim > isec_auto.new.bim
-mv isec_auto.new.bim isec_auto.bim
+awk 'BEGIN{OFS="\t"} {$2=$1"_"$4; print}' GGVD_232.bim > GGVD_232.new.bim
+mv GGVD_232.new.bim GGVD_232.bim
 
 # 提取 pos 文件
 awk '{print $1"\t"$4}' input.bim > input.pos
