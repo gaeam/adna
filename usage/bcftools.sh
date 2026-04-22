@@ -2,6 +2,9 @@
 source /home/kexin_li/miniforge3/etc/profile.d/conda.sh
 conda activate bioenv
 
+# 查看 vcf 文件过滤条件/处理步骤
+bcftools view -h vargoats_renamed_29.vcf.gz | less
+
 # 索引（重新索引）
 bcftools index --force vargoats_snps_1372_20230313_auto.vcf.gz 
 
