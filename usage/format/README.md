@@ -181,5 +181,3 @@ samtools faidx /Volumes/HardDrive/cattle_ARS-UCD2.0.fa
 # 格式转换
 
 https://github.com/ACAD-UofA/Guide-to-manipulating-PLINK-EIG-and-VCF-files?tab=readme-ov-file
-
-![126023876-4e4d964e-403f-484b-a67b-3023fe255954.png](126023876-4e4d964e-403f-484b-a67b-3023fe255954.png)
