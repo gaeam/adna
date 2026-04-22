@@ -1,4 +1,5 @@
 #!/bin/bash
+# 该脚本可以用于把两个不同的 panel 的 plink 文件合并
 
 # 直接运行 --bmerge 后如果碰到下面的报错，需要先运行 flip，再重新合并（少的话就直接删了吧）
 # Error: 7188 variants with 3+ alleles present.
