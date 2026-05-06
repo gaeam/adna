@@ -21,7 +21,7 @@ set -e
 
 # 2. 定义关键路径和参数变量
 THREADS=10
-REF_FASTA="/mnt/data3/Genomes/Ovis_Capra_genome_zehui_210817/Capra/bwa-0.5.10"
+REF_FASTA="/mnt/data3/Genomes/Goat_kexin_260316/bwa-0.5.10"
 INPUT_LIST="SAMEA7368740.list"
 
 # 3. 检查输入文件列表是否存在
