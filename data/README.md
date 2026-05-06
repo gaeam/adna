@@ -6,7 +6,7 @@
 
 这一步有两种软件组合可以选择：`cutadapt` (单端数据) + `adapterremoval` (双端数据) 和 `fastp` 
 
-** cutadapt + adapterremoval **
+**cutadapt + adapterremoval**
 
 - 单端测序数据 (cutadapt)：`trim2bam_se.sh`
 
