@@ -46,15 +46,13 @@ zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
 samtools view -f 2 your.bam
 ```
 
-> 比对后的 bam 里，双端 reads 中可能出现：（1）两条都比对上了，且方向正确，即 properly paired（flag 包含 2）；（2）只有一条比对上了，不是 properly paired；（3）两条都没比对上，也不是 properly paired
+> 比对后的 bam 里，双端 reads 中可能出现：（1）两条都比对上了，且方向正确，即 properly paired (flag 包含 2)；（2）只有一条比对上了，不是 properly paired；（3）两条都没比对上，也不是 properly paired
 
 ### 3. 添加 Read Group + 去重
 
 同上，在这一步也需要区分 collapsed 和 paired：`addRG_rmdup.sh`
 
 ### 4. 合并 bam 文件 + 再次去重
-
-### 5. （optional）提取常染色体
 
 ## 问题记录
 
