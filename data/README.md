@@ -12,7 +12,7 @@
 
 - 双端测序数据 (adapterremoval)：`trim2bam_pe.sh`
 
-对于双端测序数据，采取的策略是：使用 `--collapse` 参数
+其中，对于双端测序数据，采取的策略是：使用 `--collapse` 参数
 
 - `collapsed.truncated.gz`：containing merged reads that have been trimmed due to the `--trimns` or `--trimqualities` options，merge 成功，但末端有低质量碱基或 N，经过截断后输出
 
@@ -28,7 +28,7 @@ zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
 
 **fastp (古 DNA 及现代数据均可)**
 
-
+- 双端测序数据：`trim2bam.pe.fastp.sh`
 
 ### 2. 比对到参考基因组 + 排序 + MQ30 过滤（只保留 mapping quality >= 30 的 reads）
 
@@ -36,7 +36,11 @@ zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
 
 - 未经 UDG 处理的古代数据：`align_filter_noUDG.sh`
 
-对于当作双端测序处理的  `pair1.truncated.gz`和 `pair2.truncated.gz` 的输出文件，需要额外加入过滤条件：只保留正确配对的双端 reads，单端 reads 会被过滤掉（properly paired）
+无论是否经过 UDG 处理，对于双端测序处理需要分为 `collapsed` 和 `paired` 两部分进行比对
+
+- collapsed (当作单端数据)：`mapping.collapsed.sh` (UDG 处理)
+
+- paired (当作双端数据)：`mapping.paired.sh` (UDG 处理)，需要额外加入过滤条件：只保留正确配对的双端 reads，单端 reads 会被过滤掉（properly paired）
 
 ```bash
 samtools view -f 2 your.bam
@@ -46,7 +50,7 @@ samtools view -f 2 your.bam
 
 ### 3. 添加 Read Group + 去重
 
-`addRG_rmdup.sh`
+同上，在这一步也需要区分 collapsed 和 paired：`addRG_rmdup.sh`
 
 ### 4. 合并 bam 文件 + 再次去重
 
