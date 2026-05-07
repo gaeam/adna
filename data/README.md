@@ -6,7 +6,7 @@
 
 这一步有两种软件组合可以选择：`cutadapt` (单端数据) + `adapterremoval` (双端数据) 和 `fastp` 
 
-**cutadapt + adapterremoval**
+**cutadapt + adapterremoval (古 DNA 使用)**
 
 - 单端测序数据 (cutadapt)：`trim2bam_se.sh`
 
@@ -26,7 +26,7 @@ zcat *.collapsed.truncated.gz *.collapsed.gz | gzip > *.collapsed.all.gz
 
 对于 `collapsed.truncated.gz` 和 `collapsed.gz`，把它们合并在一起、当作单端测序数据使用 `fastq2bam` 程序；对于 `pair1.truncated.gz`和 `pair2.truncated.gz`，当作双端测序数据使用 `fastq2bam` 程序
 
-** fastp **
+**fastp (古 DNA 及现代数据均可)**
 
 
 
