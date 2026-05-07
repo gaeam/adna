@@ -3,7 +3,7 @@ set -euo pipefail
 
 echo "步骤1: 正在合并BAM文件..."
 java -jar /home/kexin_li/picard.jar MergeSamFiles \
-    $(printf "I=%s " *.capra.mapping.sorted.MQ30.RG.uniq.bam) \
+    $(printf "I=%s " *.ARS1.mapping.sorted.MQ30.RG.uniq.bam) \
     O=SAMEA7368732.bam
 
 echo "步骤2: 正在标记并移除重复序列..."
