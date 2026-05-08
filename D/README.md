@@ -2,9 +2,11 @@
 
 https://zhuanlan.zhihu.com/p/615080742
 
+## 原理
+
 D-statistics 不同软件的计算公式可能不一样
 
-**（1）AdmixTools**
+### （1）AdmixTools (目前使用的软件)
 
 The 4-population test, implemented here as D-statistics, is also a formal test for admixture based on a four taxon 4 statistic, which can provide some information about the direction of gene ﬂow.
 
@@ -19,9 +21,11 @@ The output of qpDstat is informative about the direction of gene flow. So for 4 
 
 - If the Z-score is -ve, then the gene flow occured either between W and Z or X and Y. 
 
-**（2）ANGSD**
+### （2）ANGSD
 ABBA-BABA
 
-** Notes **
+**Notes**
 
 - 只使用 transversion 位点的原因：“Transitions were ignored in the analysis, to reduce the effect of residual DNA damage on calculations” ([Daly 等, 2018, p. 27]
+
+## pipeline
