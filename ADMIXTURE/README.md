@@ -2,9 +2,9 @@
 
 > 一般不加入外群
 
-1. LD pruning（去除高连锁 SNP）
+1. LD pruning（去除高连锁 SNP）：LD_pruning.sh
    
-2. 根据 prune.in 文件筛选 SNP
+2. 根据 prune.in 文件筛选 SNP：SNP_filtering.sh
    
 3. 运行 ADMIXTURE
    
