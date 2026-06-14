@@ -1,0 +1,1 @@
+# kpPlotBAMDensity plots the read density of a BAM file. It does not plot the coverage but the read density as the number of reads overlapping a every window. It uses Rsamtools to efficiently access the BAM file. The BAM file must be indexed.
